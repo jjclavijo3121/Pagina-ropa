@@ -1,0 +1,63 @@
+:root {
+  /* Tienda de ropa: crema, carbón, terracota */
+  --cream: #f7f3ee;
+  --charcoal: #1a1614;
+  --taupe: #6b635c;
+  --muted: #9a9189;
+  --terracotta: #b85c4a;
+  --sand: #e8e0d6;
+
+  --text: var(--taupe);
+  --text-h: var(--charcoal);
+  --bg: var(--cream);
+  --surface: #efe9e1;
+  --border: #ddd5cb;
+  --nav-bg: #fffefb;
+  --hero-bg: #f0ebe4;
+  --menu-bg: #fffefb;
+  --footer-bg: var(--charcoal);
+  --footer-text: #c9c2b8;
+  --accent: var(--terracotta);
+
+  --sans: 'Segoe UI', system-ui, Roboto, sans-serif;
+  --heading: Georgia, 'Times New Roman', serif;
+
+  font: 16px/1.5 var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+.layout {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
