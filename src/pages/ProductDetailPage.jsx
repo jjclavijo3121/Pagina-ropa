@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { fetchProductById } from '../api/client'
 import { useCart } from '../context/CartContext'
 import { getProductById } from '../data/products'
 import { formatPrice, getDisplayPrice } from '../utils/formatPrice'
@@ -7,9 +8,40 @@ import { formatPrice, getDisplayPrice } from '../utils/formatPrice'
 function ProductDetailPage() {
   const { id } = useParams()
   const { addToCart } = useCart()
-  const product = getProductById(id)
+  const [product, setProduct] = useState(null)
+  const [loading, setLoading] = useState(true)
   const [selectedColor, setSelectedColor] = useState(null)
   const [activeImage, setActiveImage] = useState(0)
+
+  useEffect(() => {
+    let cancelled = false
+    setLoading(true)
+    setSelectedColor(null)
+    setActiveImage(0)
+
+    fetchProductById(id)
+      .then((data) => {
+        if (!cancelled) setProduct(data)
+      })
+      .catch(() => {
+        if (!cancelled) setProduct(getProductById(id))
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [id])
+
+  if (loading) {
+    return (
+      <div className="product-detail product-detail--empty">
+        <p className="hero__text">Cargando producto…</p>
+      </div>
+    )
+  }
 
   if (!product) {
     return (

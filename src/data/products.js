@@ -191,3 +191,7 @@ export function getProductsByPath(pathname) {
 export function getProductById(id) {
   return catalogMap.get(id) ?? null
 }
+
+export function getAllProducts() {
+  return Array.from(catalogMap.values())
+}

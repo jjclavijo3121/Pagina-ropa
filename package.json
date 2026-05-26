@@ -5,16 +5,23 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:server": "node --watch server/index.js",
+    "dev:all": "concurrently -n web,api -c cyan,magenta \"npm run dev\" \"npm run dev:server\"",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start:server": "node server/index.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.15.1"
   },
   "devDependencies": {
+    "concurrently": "^9.2.0",
     "@eslint/js": "^9.39.4",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
