@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { MENU_ITEMS, NAVBAR_LINKS } from '../config/navigation'
 import CartButton from './CartButton'
@@ -8,8 +8,24 @@ import '../App.css'
 
 function Layout() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuButtonRef = useRef(null)
+  const closeButtonRef = useRef(null)
+  const wasMenuOpenRef = useRef(false)
 
   const closeMenu = () => setMenuOpen(false)
+
+  useEffect(() => {
+    if (menuOpen) {
+      wasMenuOpenRef.current = true
+      closeButtonRef.current?.focus()
+      return
+    }
+
+    if (wasMenuOpenRef.current) {
+      menuButtonRef.current?.focus()
+      wasMenuOpenRef.current = false
+    }
+  }, [menuOpen])
 
   return (
     <div className="layout">
@@ -17,6 +33,7 @@ function Layout() {
 
       <header className="navbar">
         <button
+          ref={menuButtonRef}
           type="button"
           className="menu-btn"
           onClick={() => setMenuOpen(true)}
@@ -57,10 +74,12 @@ function Layout() {
       <aside
         className={`side-menu ${menuOpen ? 'side-menu--open' : ''}`}
         aria-hidden={!menuOpen}
+        inert={!menuOpen}
       >
         <div className="side-menu__header">
           <span className="side-menu__title">Menú</span>
           <button
+            ref={closeButtonRef}
             type="button"
             className="side-menu__close"
             onClick={closeMenu}

@@ -53,6 +53,17 @@ function HomePage() {
         aria-label={HOME_PROMO_BANNER.imageAlt}
       >
         <div className="home-wide-banner__overlay" aria-hidden="true" />
+        <div className="home-wide-banner__content">
+          <p className="home-wide-banner__tag">Nosotros</p>
+          <h2 className="home-wide-banner__title">Conoce m&aacute;s sobre nuestra esencia</h2>
+          <p className="home-wide-banner__text">
+            Este espacio tendr&aacute; un mensaje m&aacute;s completo sobre la marca,
+            nuestra visi&oacute;n y lo que queremos transmitir.
+          </p>
+          <Link to="/nosotros" className="home-wide-banner__cta">
+            Ir a Nosotros
+          </Link>
+        </div>
         <img
           src={promoBannerImage}
           alt={HOME_PROMO_BANNER.imageAlt}
